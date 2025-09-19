@@ -1,210 +1,105 @@
 <!doctype html>
+
 <html lang="pt-br">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Edu • Link-in-bio</title>
-  <meta name="description" content="Links oficiais do Edu (@edutouca). TikTok, vídeos, Tierlist e Editor 'Terminated'." />
+  <title>toucaBR • Link-in-bio</title>
+  <meta name="description" content="Links oficiais do ToucaBR (@toucabr). TikTok, vídeos, Tierlist e Editor 'Terminated'." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
       --ink:#f5fbff; --muted:#c9d7e5;
-      --bg1:#05243a; --bg2:#07324d; --bg3:#0b4465; --cy1:#00d1ff; --cy2:#3ff2ff;
-      --btn:#0e2e46; --btnBorder:#1a4e70; --btnHover:#0f3652; --btnShadow:rgba(0, 209, 255, .35);
-      --red1:#ff5a66; --cyan1:#10d4ff;
+      --btn:#0e2e46; --btnBorder:#1a4e70; --btnShadow:rgba(0, 209, 255, .35);
       --radius:22px;
-    }
+    }*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; color:var(--ink); font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: linear-gradient(-45deg, #020817, #0b1a33, #1c0f2e);
+  background-size: 400% 400%;
+  animation: gradientBG 20s ease infinite;
+  overflow-x:hidden;
+  position:relative;
+  isolation:isolate;
+}
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; color:var(--ink); font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      /* Fundo: 2 gradientes dinâmicos + ruído sutil */
-      background:
-        radial-gradient(1200px 900px at 20% -10%, rgba(16,212,255,.22), transparent 60%),
-        radial-gradient(1100px 800px at 100% 0%, rgba(44,166,255,.18), transparent 60%),
-        linear-gradient(140deg, var(--bg1), var(--bg2) 40%, var(--bg3));
-      overflow-x:hidden;
-      position:relative;
-      isolation:isolate;
-    }
-    /* camada animada por trás (blob ciano) */
-    .bg-anim{
-      position:fixed; inset:-20vmax;
-      background:
-        radial-gradient(closest-side, rgba(16,212,255,.35), transparent 70%) 10% 10%/40vmax 40vmax,
-        radial-gradient(closest-side, rgba(0,174,255,.25), transparent 70%) 80% 0%/45vmax 45vmax,
-        radial-gradient(closest-side, rgba(0,255,224,.18), transparent 70%) 60% 90%/50vmax 50vmax;
-      filter:blur(40px) saturate(120%);
-      animation: drift 26s ease-in-out infinite alternate;
-      z-index:-1;
-    }
-    @keyframes drift{
-      0%{ transform:translate3d(0,0,0) scale(1); }
-      100%{ transform:translate3d(-4vmax,2vmax,0) scale(1.05); }
-    }
+.wrap{max-width:720px;margin:0 auto;padding:24px}
+header{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:28px 18px 14px;}
 
-    .wrap{max-width:720px;margin:0 auto;padding:24px}
-    header{
-      display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;
-      padding:28px 18px 14px;
-    }
-    .pfp{
-      width:96px; height:96px; border-radius:50%;
-      display:grid; place-items:center; font:800 34px/1 'Archivo Black', Inter, sans-serif; letter-spacing:1px;
-      color:#06212f; background:conic-gradient(from 220deg, #cfffff, #a8f2ff, #d9ffff); border:3px solid rgba(255,255,255,.65);
-      box-shadow:0 18px 60px rgba(0,0,0,.35), 0 0 0 8px rgba(16,212,255,.12);
-      animation: pop .6s ease both;
-    }
-    @keyframes pop{ from{ transform:scale(.85); opacity:0 } to{ transform:none; opacity:1 } }
-    h1{margin:0; font:800 28px/1 'Archivo Black', Inter, sans-serif}
-    .handle{color:var(--muted); font-weight:700}
-    .share{
-      display:flex; gap:10px; margin-top:6px;
-    }
-    .chip{
-      padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.06); color:#e7f7ff; font-weight:700; font-size:12px;
-      backdrop-filter: blur(6px);
-    }
+.pfp{
+  width:110px;height:110px;border-radius:50%;overflow:hidden;
+  box-shadow:0 18px 60px rgba(0,0,0,.35), 0 0 0 8px rgba(16,212,255,.12);
+  perspective: 800px;
+  animation: spin3d 12s infinite linear;
+  transform-style: preserve-3d;
+}
+.pfp img{
+  width:100%;height:100%;object-fit:cover;border-radius:50%;
+  display:block;
+}
+@keyframes spin3d{
+  0%{transform:rotateY(0deg)}
+  100%{transform:rotateY(360deg)}
+}
 
-    /* Lista de links */
-    .links{display:grid; gap:16px; margin:18px 0 26px}
-    .btn{
-      position:relative; display:flex; align-items:center; gap:12px; width:100%;
-      padding:18px 18px; border-radius:var(--radius); text-decoration:none; color:var(--ink); font-weight:800;
-      border:1px solid var(--btnBorder);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03)),
-        linear-gradient(140deg, var(--btn), #0b2436);
-      box-shadow: 0 20px 50px rgba(0,0,0,.35), 0 8px 22px var(--btnShadow);
-      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
-      overflow:hidden;
-    }
-    .btn:hover{ transform: translateY(-2px); filter:brightness(1.06); box-shadow: 0 26px 60px rgba(0,0,0,.38), 0 10px 26px rgba(0, 209, 255, .45); }
-    .btn:active{ transform: translateY(0); }
-    .btn .icon{
-      width:44px; height:44px; border-radius:12px; display:grid; place-items:center; flex:0 0 auto;
-      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.02));
-      border:1px solid var(--btnBorder);
-    }
-    .btn .txt{flex:1}
-    .btn .arrow{opacity:.8}
+.handle{color:var(--muted);font-weight:700}
+.share{display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;justify-content:center;}
+.chip{padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#e7f7ff;font-weight:700;font-size:12px;backdrop-filter: blur(6px);}
 
-    /* Destaques */
-    .btn.red{
-      border-color:#7a1d25;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03)),
-        linear-gradient(140deg, #3a0d13, #2a0a0f);
-      box-shadow: 0 18px 50px rgba(0,0,0,.35), 0 8px 22px rgba(255,90,102,.35);
-    }
-    .btn.red .icon{background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.03)); border-color:#91242d}
-    .pill-red{background:linear-gradient(180deg,#ff8a93,#ff5a66); color:#2a090b}
+.links{display:grid;gap:16px;margin:18px 0 26px}
+.btn{
+  position:relative;display:flex;align-items:center;gap:12px;width:100%;padding:18px 18px;border-radius:var(--radius);
+  text-decoration:none;color:var(--ink);font-weight:800;border:1px solid var(--btnBorder);
+  background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03)),linear-gradient(140deg, var(--btn), #0b2436);
+  box-shadow:0 20px 50px rgba(0,0,0,.35), 0 8px 22px var(--btnShadow);
+  transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;overflow:hidden;backdrop-filter: blur(8px);
+}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 26px 60px rgba(0,0,0,.38),0 10px 26px rgba(0,209,255,.45)}
+.btn .icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;flex:0 0 auto;background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.02));border:1px solid var(--btnBorder)}
+.btn .txt{flex:1}
+.btn .arrow{opacity:.8}
 
-    .btn.cyan{
-      border-color:#1a5776;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03)),
-        linear-gradient(140deg, #0b3149, #0a283c);
-      box-shadow: 0 18px 50px rgba(0,0,0,.35), 0 8px 22px rgba(16,212,255,.35);
-    }
-    .pill-cyan{background:linear-gradient(180deg,#66ebff,#10d4ff); color:#06202a}
+.btn.red{border-color:#7a1d25;background:linear-gradient(140deg,#3a0d13,#2a0a0f);box-shadow:0 18px 50px rgba(0,0,0,.35),0 8px 22px rgba(255,90,102,.35)}
+.btn.cyan{border-color:#4f6970;background:linear-gradient(140deg,#72949F,#2f3e44);box-shadow:0 18px 50px rgba(0,0,0,.35),0 8px 22px rgba(114,148,159,.45)}
 
-    /* Rodapé */
-    footer{opacity:.8; text-align:center; padding:18px 0; font-size:12px}
+footer{opacity:.8;text-align:center;padding:18px 0;font-size:12px}
 
-    /* micro-anim de brilho correndo */
-    .shine::after{
-      content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
-      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.28) 12%, transparent 24%);
-      transform: translateX(-120%); filter: blur(6px);
-      animation: shine 3.8s ease-in-out infinite;
-    }
-    @keyframes shine{ 0%{transform:translateX(-120%)} 60%{transform:translateX(120%)} 100%{transform:translateX(120%)} }
   </style>
 </head>
 <body>
-  <div class="bg-anim" aria-hidden="true"></div>
-
   <div class="wrap">
     <header>
-      <div class="pfp" title="Edu">EDU</div>
-      <h1>Links do Edu</h1>
-      <div class="handle">@edutouca</div>
+      <div class="pfp"><img src="https://files.fm/thumb_show.php?i=6wcvn4ppjp&v=2" alt="Perfil"></div>
+      <div class="handle">@toucabr</div>
       <div class="share">
         <span class="chip">Conteúdo quente & confortante 🔥😌</span>
-        <a class="chip" href="https://www.tiktok.com/@edutouca" target="_blank" rel="noopener">Ver perfil no TikTok</a>
+        <a class="chip" href="https://www.tiktok.com/@toucabr" target="_blank" rel="noopener">Ver perfil no TikTok</a>
       </div>
-    </header>
+    </header><main class="links" id="links">
+  <a class="btn red" href="https://sukoks.github.io/sukoks/" target="_blank" rel="noopener">
+    <div class="icon">🔥</div>
+    <div class="txt"><div style="font-weight:900">Tierlist Oficial</div><small style="color:var(--muted)">Monte e compartilhe sua lista</small></div>
+    <div class="arrow">↗</div>
+  </a>
 
-    <main class="links" id="links">
-      <!-- Destaques -->
-      <a class="btn red shine" href="https://sukoks.github.io/sukoks/" target="_blank" rel="noopener">
-        <div class="icon pill-red">🔥</div>
-        <div class="txt">
-          <div style="font-weight:900">Tierlist Oficial</div>
-          <small style="color:var(--muted)">Monte e compartilhe sua lista</small>
-        </div>
-        <div class="arrow">↗</div>
-      </a>
+  <a class="btn cyan" href="https://share.google/QqosY2BvphHymUvxE" target="_blank" rel="noopener">
+    <div class="icon">🛠️</div>
+    <div class="txt"><div style="font-weight:900">Editor – Estilo “Terminated”</div><small style="color:var(--muted)">Crie sua arte em 1 clique</small></div>
+    <div class="arrow">↗</div>
+  </a>
+</main>
 
-      <a class="btn cyan shine" href="https://share.google/QqosY2BvphHymUvxE" target="_blank" rel="noopener">
-        <div class="icon pill-cyan">🛠️</div>
-        <div class="txt">
-          <div style="font-weight:900">Editor – Estilo “Terminated”</div>
-          <small style="color:var(--muted)">Crie sua arte em 1 clique</small>
-        </div>
-        <div class="arrow">↗</div>
-      </a>
+<footer>© <span id="y"></span> ToucaBR — @toucabr</footer>
 
-      <!-- TikTok vídeos (reais, conforme enviado) -->
-      <a class="btn" href="https://vm.tiktok.com/ZMA11DCLV/" target="_blank" rel="noopener">
-        <div class="icon">🎬</div>
-        <div class="txt">
-          <div style="font-weight:900">Vídeo 1</div>
-          <small style="color:var(--muted)">Abrir no TikTok</small>
-        </div>
-        <div class="arrow">↗</div>
-      </a>
-      <a class="btn" href="https://vm.tiktok.com/ZMA11roHF/" target="_blank" rel="noopener">
-        <div class="icon">🎬</div>
-        <div class="txt">
-          <div style="font-weight:900">Vídeo 2</div>
-          <small style="color:var(--muted)">Abrir no TikTok</small>
-        </div>
-        <div class="arrow">↗</div>
-      </a>
-      <a class="btn" href="https://vm.tiktok.com/ZMA1122oB/" target="_blank" rel="noopener">
-        <div class="icon">🎬</div>
-        <div class="txt">
-          <div style="font-weight:900">Vídeo 3</div>
-          <small style="color:var(--muted)">Abrir no TikTok</small>
-        </div>
-        <div class="arrow">↗</div>
-      </a>
-    </main>
-
-    <footer>© <span id="y"></span> Edu — @edutouca</footer>
-  </div>
-
-  <script>
-    // Atualiza ano do rodapé
+  </div>  <script>
     document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Pequena animação de revelação ao rolar (interseção)
-    const obs = new IntersectionObserver((entries)=>{
-      for(const e of entries){
-        if(e.isIntersecting){ e.target.style.transition='transform .45s ease, opacity .45s ease';
-          e.target.style.transform='translateY(0)'; e.target.style.opacity='1'; obs.unobserve(e.target); }
-      }
-    },{threshold:.1});
-    document.querySelectorAll('.btn').forEach(el=>{
-      el.style.transform='translateY(6px)'; el.style.opacity='.0';
-      obs.observe(el);
-    });
-  </script>
-</body>
+  </script></body>
 </html>
